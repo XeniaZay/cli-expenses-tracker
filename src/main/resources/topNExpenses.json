@@ -1,0 +1,12 @@
+[ {
+  "date" : [ 2026, 1, 1 ],
+  "amount" : {
+    "value" : 43543,
+    "currency" : "RUB"
+  },
+  "category" : {
+    "code" : "1",
+    "name" : "1"
+  },
+  "note" : "note"
+} ]
