@@ -25,8 +25,7 @@ public class LedgerService {
     private final Map<YearMonth,Map<Category,Budget>> budgets ;//= new ConcurrentHashMap<>();
     private final Map<String,Category> catCache = new ConcurrentHashMap<>();
 
-    /*Тут впервые инициализирую dataLock*/
-    private final ReadWriteLock dataLock = new ReentrantReadWriteLock();
+
     // private final Deque<Command> undoStack = new ArrayDeque<>();
 
     public LedgerService(Repository<Transaction> transactionRepository, Map<YearMonth,Map<Category,Budget>> budgets){
@@ -34,12 +33,6 @@ public class LedgerService {
 
         this.transactionRepository = Objects.requireNonNull(transactionRepository);
         this.budgets = Objects.requireNonNull(budgets);
-    }
-
-
-    /*Метод для использования в ReportService*/
-    public ReadWriteLock getDataLock(){
-        return dataLock;
     }
 
     public void addCategory(String code, String name) {
@@ -102,71 +95,44 @@ public class LedgerService {
 //            undoStack.push(()-> transactionRepository.remove(income.id));
     }
 
-    /*Все методы ниже используются для составления отчетов, поэтому тоже запихнула лок*/
     private Money getTotalExpensesByPeriodAndCategory(YearMonth period, Category category){
-        dataLock.readLock().lock();
-        try {
-            LocalDate start = period.atDay(1);
-            LocalDate end = period.atEndOfMonth();
-            return transactionRepository.findAll().stream()
-                    .filter(t -> t instanceof Expense)
-                    .filter(t -> !t.getDate().isBefore(start) && !t.getDate().isAfter(end))
-                    .filter(t -> t.getCategory().equals(category))
-                    .map(Transaction::getAmount)
-                    .reduce(new Money(BigDecimal.ZERO, Currency.getInstance("RUB")), Money::add);
-        }finally {
-            dataLock.readLock().unlock();
-        }
+        LocalDate start = period.atDay(1);
+        LocalDate end = period.atEndOfMonth();
+        return transactionRepository.findAll().stream()
+                .filter(t -> t instanceof Expense)
+                .filter(t -> !t.getDate().isBefore(start) && !t.getDate().isAfter(end))
+                .filter(t -> t.getCategory().equals(category))
+                .map(Transaction::getAmount)
+                .reduce(new Money(BigDecimal.ZERO, Currency.getInstance("RUB")), Money::add);
     }
 
 
     public List<Transaction> getAllTransactions(){
-        dataLock.readLock().lock();
-        try{
-            return new ArrayList<>(transactionRepository.findAll());
-        } finally {
-            dataLock.readLock().unlock();
-        }
+        return new ArrayList<>(transactionRepository.findAll());
     }
 
     public List<Income> getIncomesByPeriod(YearMonth period){
-        dataLock.readLock().lock();
-        try {
-            LocalDate start = period.atDay(1);
-            LocalDate end = period.atEndOfMonth();
-            return getAllTransactions().stream()
-                    .filter(t -> t instanceof Income)
-                    .map(t -> (Income) t)
-                    .filter(t -> !t.getDate().isBefore(start) && !t.getDate().isAfter(end))
-                    .toList();
-        }finally {
-            dataLock.readLock().unlock();
-        }
+        LocalDate start = period.atDay(1);
+        LocalDate end = period.atEndOfMonth();
+        return getAllTransactions().stream()
+                .filter(t -> t instanceof Income)
+                .map(t -> (Income) t)
+                .filter(t -> !t.getDate().isBefore(start) && !t.getDate().isAfter(end))
+                .toList();
     }
 
     public List<Expense> getExpensesByPeriod(YearMonth period){
-        dataLock.readLock().lock();
-        try {
-            LocalDate start = period.atDay(1);
-            LocalDate end = period.atEndOfMonth();
-            return getAllTransactions().stream()
-                    .filter(t -> t instanceof Expense)
-                    .map(t -> (Expense) t)
-                    .filter(t -> !t.getDate().isBefore(start) && !t.getDate().isAfter(end))
-                    .toList();
-        }finally {
-            dataLock.readLock().unlock();
-        }
+        LocalDate start = period.atDay(1);
+        LocalDate end = period.atEndOfMonth();
+        return getAllTransactions().stream()
+                .filter(t -> t instanceof Expense)
+                .map(t -> (Expense) t)
+                .filter(t -> !t.getDate().isBefore(start) && !t.getDate().isAfter(end))
+                .toList();
     }
 
     public Map<Category,Money> getExpensesInCategories(YearMonth period){
-        dataLock.readLock().lock();
-        try {
-            return getExpensesByPeriod(period).stream()
-                    .collect(Collectors.groupingBy(Expense::getCategory, Collectors.reducing(new Money(BigDecimal.ZERO, Currency.getInstance("RUB")), Expense::getAmount, Money::add)));
-        }finally {
-            dataLock.readLock().unlock();
-        }
+        return getExpensesByPeriod(period).stream()
+                .collect(Collectors.groupingBy(Expense::getCategory, Collectors.reducing(new Money(BigDecimal.ZERO, Currency.getInstance("RUB")), Expense::getAmount, Money::add)));
     }
-
 }

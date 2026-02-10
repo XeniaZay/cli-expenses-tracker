@@ -118,6 +118,8 @@ public class App {
                         reportService.exportTopNExpenses(n,type);
                     }catch (IOException e) {
                         throw new RuntimeException(e);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
                     System.out.println("report exported");
                 }

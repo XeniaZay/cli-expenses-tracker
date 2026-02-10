@@ -1,27 +1,24 @@
-2026-02-06 16:33:46,676 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
-2026-02-06 16:33:46,686 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
-2026-02-06 16:33:46,690 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
-2026-02-06 16:33:46,691 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB
-2026-02-06 16:33:46,705 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
-2026-02-06 16:33:46,705 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
-2026-02-06 16:33:46,705 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
-2026-02-06 16:33:46,706 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB
-2026-02-06 16:34:30,308 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
-2026-02-06 16:34:30,309 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
-2026-02-06 16:34:30,313 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
-2026-02-06 16:34:30,313 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB
-2026-02-06 16:34:30,395 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
-2026-02-06 16:34:30,396 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
-2026-02-06 16:34:30,396 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
-2026-02-06 16:34:30,397 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB
-2026-02-06 16:34:51,628 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
-2026-02-06 16:34:51,629 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
-2026-02-06 16:34:51,632 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
-2026-02-06 16:34:51,633 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB
-2026-02-06 16:34:51,699 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
-2026-02-06 16:34:51,700 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
-2026-02-06 16:34:51,700 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
-2026-02-06 16:34:51,701 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB
-2026-02-06 16:35:10,567 INFO  com.ledgerlite.app.Main - App starting...
-2026-02-06 16:35:17,407 INFO  c.ledgerlite.service.LedgerService - Category added : 1 1
-2026-02-06 16:35:30,690 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-01 43543,00 RUB
+2026-02-10 20:00:23,949 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
+2026-02-10 20:00:23,965 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
+2026-02-10 20:00:23,970 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
+2026-02-10 20:00:23,971 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB
+2026-02-10 20:00:24,185 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
+2026-02-10 20:00:24,185 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
+2026-02-10 20:00:24,186 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
+2026-02-10 20:00:24,186 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB
+2026-02-10 20:00:40,119 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
+2026-02-10 20:00:40,120 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
+2026-02-10 20:00:40,125 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
+2026-02-10 20:00:40,127 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB
+2026-02-10 20:00:40,221 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
+2026-02-10 20:00:40,221 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
+2026-02-10 20:00:40,222 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
+2026-02-10 20:00:40,222 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB
+2026-02-10 20:04:18,893 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
+2026-02-10 20:04:18,894 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
+2026-02-10 20:04:18,900 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
+2026-02-10 20:04:18,901 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB
+2026-02-10 20:04:18,989 INFO  c.ledgerlite.service.LedgerService - Category added : FOOD Food
+2026-02-10 20:04:18,989 INFO  c.ledgerlite.service.LedgerService - Category added : ENTERT Entertainment
+2026-02-10 20:04:18,990 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-20 1000,00 RUB
+2026-02-10 20:04:18,990 INFO  c.ledgerlite.service.LedgerService - Expense added : 2026-01-21 3000,00 RUB

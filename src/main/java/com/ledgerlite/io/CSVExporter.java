@@ -14,10 +14,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class CSVExporter{
 
 
-//    public CSVExporter(){
-//    }
+    public CSVExporter(){
+    }
 
-    public <T> void export(List<T> objects, String output) throws Exception  {
+    public static <T> void export(List<T> objects, String output) throws Exception  {
         try (FileWriter writer = new FileWriter(output)) {
             var builder = new StatefulBeanToCsvBuilder<T>(writer)
                     .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
@@ -31,7 +31,7 @@ public class CSVExporter{
     }
 
 
-    public <T> void export(T object, String output) throws IOException {
+    public static <T> void export(T object, String output) throws IOException {
         try (FileWriter writer = new FileWriter(output)) {
             var builder = new StatefulBeanToCsvBuilder<T>(writer)
                     .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)

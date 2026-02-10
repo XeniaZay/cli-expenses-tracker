@@ -41,22 +41,22 @@ public class InMemoryRepository<T> implements Repository<T>{
 
     @Override
     public void save(T item){
-        lock.readLock().lock();
+        lock.writeLock().lock();
         try{
             UUID id = extractId(item);
             store.put(id,item);
         } finally {
-            lock.readLock().unlock();
+            lock.writeLock().unlock();
         }
     }
 
     @Override
     public void delete(UUID id){
-        lock.readLock().lock();
+        lock.writeLock().lock();
         try{
             store.remove(id);
         } finally {
-            lock.readLock().unlock();
+            lock.writeLock().unlock();
         }
     }
 }

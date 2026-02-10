@@ -10,7 +10,4 @@ public interface Repository<T> {
     List<T> findAll();
     void save(T item);
     void delete(UUID id);
-//    default List<T> query(Specification<T> spec){
-//
-//    };
 }

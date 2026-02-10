@@ -24,7 +24,7 @@ public class JSONEsporterTest {
     private final Map<YearMonth, Map<Category, Budget>> budgets = new ConcurrentHashMap<>();
     private LedgerService ledgerService;
     private ReportService reportService;
-    private final JSONExporter jsonExporter = new JSONExporter();
+    //private final JSONExporter jsonExporter = new JSONExporter();
 
     private final Currency RUB = Currency.getInstance("RUB");
     private Category food;
@@ -49,14 +49,14 @@ public class JSONEsporterTest {
     @Test
     void testExportList() throws Exception {
         List<Expense> topNExpenses = reportService.getTopNExpenses(2);
-        jsonExporter.export(topNExpenses,"src/test/resources/topNExpenses.json");
+        JSONExporter.export(topNExpenses,"src/test/resources/topNExpenses.json");
     }
 
     @Test
     void testExport() throws Exception {
         YearMonth period = YearMonth.from(DateUtil.parsePeriod("2026-01"));
         Report reportByPeriod = reportService.getReportByPeriod(period);
-        jsonExporter.export(reportByPeriod,"src/test/resources/reportByPeriod_"+period+".json");
+        JSONExporter.export(reportByPeriod,"src/test/resources/reportByPeriod_"+period+".json");
     }
 
 }
