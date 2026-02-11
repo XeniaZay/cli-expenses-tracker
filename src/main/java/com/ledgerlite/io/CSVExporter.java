@@ -22,6 +22,8 @@ public class CSVExporter{
             var builder = new StatefulBeanToCsvBuilder<T>(writer)
                     .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
                     .withSeparator(',')
+                    .withEscapechar(CSVWriter.NO_ESCAPE_CHARACTER)
+                    .withLineEnd(CSVWriter.DEFAULT_LINE_END)
                     .build();
 
             builder.write(objects);
@@ -36,6 +38,8 @@ public class CSVExporter{
             var builder = new StatefulBeanToCsvBuilder<T>(writer)
                     .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
                     .withSeparator(',')
+                    .withEscapechar(CSVWriter.NO_ESCAPE_CHARACTER)
+                    .withLineEnd(CSVWriter.DEFAULT_LINE_END)
                     .build();
 
             builder.write(object);

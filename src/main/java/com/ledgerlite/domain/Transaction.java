@@ -5,6 +5,7 @@ import com.opencsv.bean.CsvIgnore;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -27,6 +28,7 @@ public abstract class Transaction implements Serializable {
         this.note = (note == null)?"":note.strip();
     }
 
+    @Serial
     private void readObject(ObjectInputStream ois)
             throws IOException, ClassNotFoundException {
         ois.defaultReadObject();

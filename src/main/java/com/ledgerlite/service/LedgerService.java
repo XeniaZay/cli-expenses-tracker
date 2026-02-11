@@ -1,6 +1,8 @@
 package com.ledgerlite.service;
 
 import com.ledgerlite.domain.*;
+import com.ledgerlite.exception.ImportFormatException;
+import com.ledgerlite.io.CSVImporter;
 import com.ledgerlite.exception.ValidationException;
 import com.ledgerlite.persistence.FileStore;
 import com.ledgerlite.persistence.Repository;
@@ -155,6 +157,17 @@ public class LedgerService {
         budgets.put(period,categoryBudgetMap);
         System.out.println(budgets.entrySet().stream().toList());
         log.info("Budget setted : " + period.toString() + " " + cat.toString() + " " + limit.toString());
+    }
+
+    public void importCSV(String input){
+        try{
+            CSVImporter.importFile(input,this,transactionRepository);
+            saveToFile();
+            log.info("CSV import finished: {}", input);
+        } catch (ImportFormatException e) {
+            log.error("CSV import error: {}", e.getMessage());
+            throw new RuntimeException("import error: " + e.getMessage(), e);
+        }
     }
 
     private Money getTotalExpensesByPeriodAndCategory(YearMonth period, Category category){

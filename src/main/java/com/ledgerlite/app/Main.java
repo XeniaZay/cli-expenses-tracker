@@ -16,9 +16,6 @@ import java.util.List;
 
 public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
-//    static Repository<Category, String> categoryRepository = new InMemoryRepository<Category, String>(Category::code);
-//    static Repository<Transaction, UUID> transactionRepository = new InMemoryRepository<Transaction, UUID>(Transaction::getId);
-//    static LedgerService ledger = new LedgerService(categoryRepository, transactionRepository);
 
     public static void main(String[] args) {
         log.info("App starting...");

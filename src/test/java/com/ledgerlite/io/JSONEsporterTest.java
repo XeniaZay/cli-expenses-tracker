@@ -12,7 +12,12 @@ import com.ledgerlite.util.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Currency;
@@ -26,7 +31,8 @@ public class JSONEsporterTest {
     private LedgerService ledgerService;
     private ReportService reportService;
 
-    private final FileStore fileStore = new FileStore();
+    private FileStore fileStore;
+    private Path projectDataDir;
 
     private final Currency RUB = Currency.getInstance("RUB");
     private Category food;
@@ -34,6 +40,10 @@ public class JSONEsporterTest {
 
     @BeforeEach
     void setUp(){
+        fileStore = new FileStore();
+        projectDataDir = Paths.get("").toAbsolutePath().resolve("data");
+        cleanupTestData();
+
         ledgerService = new LedgerService(transactionRepository,budgets,fileStore);
         reportService = new ReportService(ledgerService);
 
@@ -46,6 +56,31 @@ public class JSONEsporterTest {
         ledgerService.addExpense(LocalDate.of(2026,1,20),new Money(BigDecimal.valueOf(1000), RUB),food, "еда");
         ledgerService.addExpense(LocalDate.of(2026,1,21),new Money(BigDecimal.valueOf(3000), RUB),entertainment, "развлечения");
 
+
+    }
+    private void cleanupTestData() {
+        try {
+            Path transactionsFile = projectDataDir.resolve("transactions.dat");
+            if (Files.exists(transactionsFile)) {
+                Path backup = projectDataDir.resolve("transactions.backup." +
+                        System.currentTimeMillis() + ".dat");
+                Files.move(transactionsFile, backup, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Создан backup: " + backup.getFileName());
+            }
+        } catch (IOException e) {
+            System.err.println("Не удалось очистить тестовые данные: " + e.getMessage());
+        }
+        try {
+            Path catsFile = projectDataDir.resolve("categories.dat");
+            if (Files.exists(catsFile)) {
+                Path backup = projectDataDir.resolve("categories.backup." +
+                        System.currentTimeMillis() + ".dat");
+                Files.move(catsFile, backup, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Создан backup: " + backup.getFileName());
+            }
+        } catch (IOException e) {
+            System.err.println("Не удалось очистить тестовые данные: " + e.getMessage());
+        }
     }
 
     @Test

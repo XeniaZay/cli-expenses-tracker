@@ -30,28 +30,16 @@ public class App {
     private final LedgerService ledgerService;
     private final BudgetService budgetService;
     private final ReportService reportService;
-    private final FileStore fileStore;
-    // private final CommandHandler handler;
-    private Scanner scanner;
 
     public App(){
 
         Repository<Transaction> transactionRepository = new InMemoryRepository<>();
         FileStore fileStore = new FileStore();
-        // Убираю репозитории рекордов
-        //Repository<Category> categoryRepository = new InMemoryRepository<>();
-        //Repository<Budget> budgetRepository = new InMemoryRepository<>();
-
-        //Map<String,Category> categories = new HashMap<>();
         Map<YearMonth,Map<Category,Budget>> budgets = new ConcurrentHashMap<>();
-
-
 
         this.ledgerService = new LedgerService(transactionRepository,budgets,fileStore);
         this.budgetService = new BudgetService(budgets, ledgerService);
         this.reportService = new ReportService(ledgerService);
-        this.fileStore = new FileStore();
-        this.scanner = new Scanner(System.in);
 
     }
 
@@ -103,21 +91,19 @@ public class App {
                 }
                 case "report-month" -> { // YYYY-MM json|csv
                     String[] params = parts[1].trim().split("\\s+");
-                    ensureArgs(params,1);
+                    ensureArgs(params,2);
                     YearMonth period = YearMonth.from(DateUtil.parsePeriod(params[0]));
                     String type = params[1];
-                    //Report rep = reportService.getReportByPeriod(period);
                     try{
                         reportService.exportReportByPeriod(period,type);
                     }catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                     System.out.println("report exported");
-                    //System.out.println(rep.toString());
                 }
                 case "report-top" -> { // N json|csv
                     String[] params = parts[1].trim().split("\\s+");
-                    ensureArgs(params,1);
+                    ensureArgs(params,2);
                     int n = Integer.parseInt(params[0]);
                     String type = params[1];
                     try{
@@ -128,6 +114,11 @@ public class App {
                     System.out.println("report exported");
                 }
                 case "import" -> { //csv path/to/file.csv
+                    String[] params = parts[1].trim().split("\\s+");
+                    ensureArgs(params,2);
+                    String type = params[0]; // если вдруг сделаю импорт json
+                    String path = params[1];
+                    ledgerService.importCSV(path);
                     System.out.println("ok");
                 }
                 case "undo" -> {
@@ -138,6 +129,9 @@ public class App {
                         System.out.println("Nothing to cancel");
                     }
                     System.out.println("ok");
+                }
+                case "help" -> {
+                    printHelp();
                 }
                 default -> System.out.println("Unknown command. Type \"help\"");
             }
@@ -151,8 +145,18 @@ public class App {
         if (args.length < min) throw new IllegalArgumentException("Not enough arguments");
     }
 
-    public void printHelp(PrintStream out){
-        out.println("help");
+    public void printHelp(){
+        System.out.println("Commands:");
+        System.out.println("add-cat CODE NAME - add category\n" +
+                "add-inc YYYY-MM-DD AMOUNT CODE [NOTE...] - add income\n" +
+                "add-exp YYYY-MM-DD AMOUNT CODE [NOTE...] - add expense\n" +
+                "set-budget YYYY-MM CODE LIMIT - set budget\n" +
+                "report-month YYYY-MM json|csv - export transactions by month to json or csv\n" +
+                "report-top N json|csv - export top n transactions to json or csv\n" +
+                "import csv path/to/file.csv - import transactions from csv file\n" +
+                "undo - undo last operation\n" +
+                "exit");
+
     }
 
 }

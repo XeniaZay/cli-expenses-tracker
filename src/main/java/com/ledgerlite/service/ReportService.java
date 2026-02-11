@@ -47,8 +47,11 @@ public class ReportService {
         Report reportByPeriod = getReportByPeriod(period);
         if (type.equalsIgnoreCase("json")){
             JSONExporter.export(reportByPeriod,"src/main/resources/reportByPeriod_"+period+".json");
+            log.info("JSON export report by period finished");
         } else if (type.equalsIgnoreCase("csv")) {
             CSVExporter.export(reportByPeriod,"src/main/resources/reportByPeriod_"+period+".csv");
+            log.info("CSV export report by period finished");
+
         }
 
     }
@@ -57,8 +60,10 @@ public class ReportService {
         List<Expense> topNExpenses = getTopNExpenses(n);
         if (type.equalsIgnoreCase("json")){
             JSONExporter.export(topNExpenses,"src/main/resources/topNExpenses.json");
+            log.info("JSON export top expenses finished");
         } else if (type.equalsIgnoreCase("csv")) {
-            CSVExporter.export(topNExpenses,"src/main/resources/topNExpenses.json");
+            CSVExporter.export(topNExpenses,"src/main/resources/topNExpenses.csv");
+            log.info("CSV export top expenses finished");
         }
 
     }
