@@ -43,10 +43,7 @@ public class App {
 
     }
 
-
     public void handleCommand(String line) {
-
-
         String[] parts = line.trim().split("\\s+", 2);
        // String[] params = parts[1].trim().split("\\s+");
 

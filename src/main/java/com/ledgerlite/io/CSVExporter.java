@@ -8,8 +8,6 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class CSVExporter{
 

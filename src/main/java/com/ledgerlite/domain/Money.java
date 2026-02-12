@@ -16,7 +16,7 @@ public record Money(BigDecimal value, Currency currency)implements Serializable 
         if (value == null) throw new IllegalArgumentException("value is blank");
         if (currency == null) throw new IllegalArgumentException("currency is blank");
         if (!Objects.equals(currency.getCurrencyCode(), "RUB")) throw new IllegalArgumentException("Invalid currency");
-        //value = value.setScale(2,RoundingMode.HALF_UP);
+        value = value.setScale(2,RoundingMode.HALF_UP);
     }
 
     public Money add(Money other){

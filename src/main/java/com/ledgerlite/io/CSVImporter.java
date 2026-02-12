@@ -28,11 +28,11 @@ public class CSVImporter {
             int lineNumber = 0;
             while ((line = br.readLine()) != null) {
                 lineNumber++;
-                // Пропускаем пустые строки и комментарии
+                // Пропускаю пустые строки и комментарии
                 if (line.trim().isEmpty() || line.startsWith("#")) {
                     continue;
                 }
-                // Пропускаем заголовок если есть
+                // Пропускаю заголовок если есть
                 if (lineNumber == 1 && line.toUpperCase().startsWith("TYPE")) {
                     continue;
                 }
@@ -50,7 +50,7 @@ public class CSVImporter {
             throw new ImportFormatException("Cannot read the file: " + csvPath);
         }
     }
-    /** Преобразует одну строку CSV в объект {@link Transaction}. */
+
     private static Transaction parseLine(String line, LedgerService ledgerService) throws ValidationException, ImportFormatException {
         String[] parts = line.split(",");
         if (parts.length < EXPECTED_COLUMNS) {
@@ -100,7 +100,7 @@ public class CSVImporter {
             throw new ImportFormatException("Category not found: " + catCode);
         }
 
-        // 6. Заметка (может содержать запятые, объединяем оставшиеся части)
+        // 6. Заметка
         String note = "";
         if (idx < parts.length) {
             note = String.join(",", Arrays.copyOfRange(parts, idx, parts.length)).trim();
@@ -112,7 +112,6 @@ public class CSVImporter {
 
         Money money = new Money(amountValue, currency);
 
-        // Создаем соответствующую транзакцию
         if (isIncome) {
             return new Income(date, money, category, note);
         } else {
